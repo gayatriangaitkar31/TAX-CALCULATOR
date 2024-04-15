@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=number], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+button{
+  width: 100%;
+  background-color: blueviolet;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+div {
+  
+  border-radius: 1px;
+  border: 1px solid #ccc;
+  background-color: white;
+  padding: 50px;
+  padding-top: 100px;
+  padding-bottom: 50px;
+  margin: 0px auto;
+  width: 100%;
+  max-width: 448px;
+}
+.input-container {
+  position: relative;
+}
+
+.tooltip {
+  top: 50%;
+  right: 5px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.tooltip::before {
+  content: '?';
+  position: absolute;
+  background-color: #fff;
+  color: #333;
+  border: 1px solid grey;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  border-radius: 50%;
+}
+
+.tooltip:hover::after {
+  content: "Gross annual Income is your total salary in a year before any deductions";
+  position: absolute;
+  background-color: grey;
+  color: #fff;
+  padding: 5px 10px;
+  text-align: center;
+  border-radius: 5px;
+  width: 120px;
+  height: 100px;
+  top: 10%;
+  right: 40%;
+  bottom: 50%;
+  left: 40%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  transition: opacity 0.3s;
+  z-index: 1;
+}
+
+.tooltip1::before {
+  content: '?';
+  position: absolute;
+  background-color: #fff;
+  color: #333;
+  border: 1px solid grey;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  border-radius: 50%;
+}
+
+.tooltip1:hover::after {
+  content: "Extra income is a money you earn in addition to your regular paycheck";
+  position: absolute;
+  background-color: grey;
+  color: #fff;
+  padding: 5px 10px;
+  text-align: center;
+  border-radius: 5px;
+  width: 120px;
+  height: 80px;
+  top: 20%;
+  right: 40%;
+  bottom: 50%;
+  left: 40%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  transition: opacity 0.3s;
+  z-index: 1;
+}
+
+.tooltip2::before {
+  content: '?';
+  position: absolute;
+  background-color: #fff;
+  color: #333;
+  border: 1px solid grey;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  border-radius: 50%;
+}
+
+.tooltip2:hover::after {
+  content: "Enter your age group";
+  position: absolute;
+  background-color: grey;
+  color: #fff;
+  padding: 5px 1px;
+  text-align: center;
+  border-radius: 5px;
+  width: 120px;
+  height: 50px;
+  top: 30%;
+  right: 40%;
+  bottom: 50%;
+  left: 40%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  transition: opacity 0.3s;
+  z-index: 1;
+}
+.tooltip3::before {
+  content: '?';
+  position: absolute;
+  background-color: #fff;
+  color: #333;
+  border: 1px solid grey;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  border-radius: 50%;
+}
+
+.tooltip3:hover::after {
+  content: "Tax deduction refers to claims made to reduce your taxable income, arising from various investments and expenses incurred by a taxpayer. ";
+  position: absolute;
+  background-color: grey;
+  color: #fff;
+  padding: 5px 10px;
+  text-align: center;
+  border-radius: 5px;
+  width: 120px;
+  height: 160px;
+  top: 40%;
+  right: 40%;
+  bottom: 50%;
+  left: 40%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  transition: opacity 0.3s;
+  z-index: 1;
+}
+#result{
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;}
+</style>
+<body>
+    <div>
+  <form id="taxForm">
+    <label for="grossIncome">Enter gross annual income</label>&nbsp;<span class="tooltip"><i class="bi bi-question-circle"></i></span>
+<br>
+    <input type="text" id="grossIncome" placeholder="Enter gross annual income" required>
+    <br>
+    <label for="extraIncome">Enter extra income</label>&nbsp;<span class="tooltip1"><i class="bi bi-question-circle"></i></span><br>
+    <input type="text" id="extraIncome" placeholder="Enter extra income" required>
+    <br>
+    <label for="ageGroup">Enter age group</label>&nbsp;<span class="tooltip2"><i class="bi bi-question-circle"></i></span><br>
+    <input type="number" id="ageGroup"required>
+    <br>
+    <label for="deductions">Enter total applicable deductions</label>&nbsp;<span class="tooltip3"><i class="bi bi-question-circle"></i></span><br>
+    <input type="text" id="deductions" placeholder="Enter total applicable deductions." required><br>
+    <button onclick="handle()">Submit</button>
+    <script src="script.js"></script>
+    <div id="result"><font face="arial"></font></div>
+
+</div>
+
+
+</body>
+</html>
